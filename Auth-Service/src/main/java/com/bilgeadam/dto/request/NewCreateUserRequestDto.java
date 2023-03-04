@@ -10,5 +10,5 @@ import lombok.*;
 public class NewCreateUserRequestDto {
     Long authid;
     Long username;
-    Long email;
+    String email;
 }
