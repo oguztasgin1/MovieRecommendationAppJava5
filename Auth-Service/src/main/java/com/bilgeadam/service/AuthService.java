@@ -3,7 +3,7 @@ package com.bilgeadam.service;
 import com.bilgeadam.dto.request.ActivateRequestDto;
 import com.bilgeadam.dto.request.LoginRequestDto;
 import com.bilgeadam.dto.request.RegisterRequestDto;
-import com.bilgeadam.dto.request.UpdatebyEmailOrUsernameRequestDto;
+import com.bilgeadam.dto.request.UpdateByEmailOrUserNameRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.exception.AuthException;
@@ -69,13 +69,15 @@ public class AuthService extends ServiceManager<Auth,Long> {
 
         }
 
-    public Boolean updateUsernameOrEmail(UpdatebyEmailOrUsernameRequestDto dto) {
+    public Boolean updateUsernameOrEmail(UpdateByEmailOrUserNameRequestDto dto) {
         Optional<Auth> auth = repository.findById(dto.getId());
         if (auth.isEmpty()){
             throw new AuthException(ErrorType.USER_NOT_FOUND);
         }
 
-        save((IAuthMapper.INSTANCE.toAuth(dto)));
+        auth.get().setEmail(dto.getEmail());
+        auth.get().setUsername(dto.getUsername());
+        update(auth.get());
         return true;
     }
 }

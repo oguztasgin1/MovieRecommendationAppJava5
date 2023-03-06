@@ -3,7 +3,7 @@ package com.bilgeadam.controller;
 import com.bilgeadam.dto.request.ActivateRequestDto;
 import com.bilgeadam.dto.request.LoginRequestDto;
 import com.bilgeadam.dto.request.RegisterRequestDto;
-import com.bilgeadam.dto.request.UpdatebyEmailOrUsernameRequestDto;
+import com.bilgeadam.dto.request.UpdateByEmailOrUserNameRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.service.AuthService;
@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @PutMapping (UPDATEBYUSERNAMEOREMAIL)
-    ResponseEntity<Boolean> updateBuUsernameOrEmail(@RequestBody UpdatebyEmailOrUsernameRequestDto dto){
+    ResponseEntity<Boolean> updateBuUsernameOrEmail(@RequestBody UpdateByEmailOrUserNameRequestDto dto){
         return ResponseEntity.ok((authService.updateUsernameOrEmail(dto)));
     }
 
