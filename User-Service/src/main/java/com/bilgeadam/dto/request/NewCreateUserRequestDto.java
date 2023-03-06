@@ -9,6 +9,6 @@ import lombok.*;
 @ToString
 public class NewCreateUserRequestDto {
     Long authid;
-    Long username;
+    String username;
     String email;
 }
