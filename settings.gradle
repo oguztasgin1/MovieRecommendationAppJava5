@@ -1,4 +1,6 @@
 rootProject.name = 'MovieRecommendationAppJava5'
 include 'Auth-Service'
 include 'User-Service'
+include 'config-server'
+include 'config-server-git'
 

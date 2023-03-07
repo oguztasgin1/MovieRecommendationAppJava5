@@ -8,6 +8,7 @@ import com.bilgeadam.manager.AuthManager;
 import com.bilgeadam.mapper.IUserMapper;
 import com.bilgeadam.repository.IUserProfileRepositroy;
 import com.bilgeadam.repository.entity.UserProfile;
+import com.bilgeadam.repository.enums.EStatus;
 import com.bilgeadam.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +59,15 @@ public class UserProfileService extends ServiceManager<UserProfile,Long> {
         update(userProfile.get());
         return true;
 
+    }
+
+    public Boolean activateStatus(Long id) {
+        Optional<UserProfile> userProfile = userProfileRepositroy.findOptionalByAuthid(id);
+        if (userProfile.isEmpty()){
+            throw new UserException(ErrorType.USER_NOT_FOUND);
+        }
+        userProfile.get().setStatus(EStatus.ACTIVE);
+        update(userProfile.get());
+        return true;
     }
 }

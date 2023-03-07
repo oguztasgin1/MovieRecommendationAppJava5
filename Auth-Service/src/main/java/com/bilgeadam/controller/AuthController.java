@@ -7,6 +7,7 @@ import com.bilgeadam.dto.request.UpdateByEmailOrUserNameRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.service.AuthService;
+import com.bilgeadam.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import static com.bilgeadam.constant.ApiUrls.*;
 @RequestMapping(AUTH)
 public class AuthController {
     private final AuthService authService;
+    private final JwtTokenManager jwtTokenManager;
 
 
     @PostMapping(REGISTER)
@@ -34,9 +36,14 @@ public class AuthController {
         return   ResponseEntity.ok(authService.activateStatus(dto));
     }
 
-    @PostMapping(LOGIN)
-    public  ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto dto){
+    @PostMapping(ACTIVATESTATUS + "2")
+    public  ResponseEntity<Boolean> activateStatus2(@RequestBody ActivateRequestDto dto){
 
+        return   ResponseEntity.ok(authService.activateStatus2(dto));
+    }
+
+    @PostMapping(LOGIN)
+    public  ResponseEntity<String> login(@RequestBody LoginRequestDto dto){
         return ResponseEntity.ok(authService.login(dto));
 
     }
@@ -46,7 +53,14 @@ public class AuthController {
         return ResponseEntity.ok((authService.updateUsernameOrEmail(dto)));
     }
 
+    @GetMapping("/getRoleFromToken")
+    public ResponseEntity<String> getRoleFromToken(String token){
+        return ResponseEntity.ok(jwtTokenManager.getRoleFromToken(token).get());
+    }
 
-
+    @GetMapping("/getIdFromToken")
+    public ResponseEntity<Long> getIdFromToken(String token){
+        return ResponseEntity.ok(jwtTokenManager.getIdFromToken(token).get());
+    }
 
 }

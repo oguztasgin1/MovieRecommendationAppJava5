@@ -27,4 +27,14 @@ public class UserProfileController {
         return ResponseEntity.ok(userProfileService.updateUser(dto));
     }
 
+    @PostMapping(ACTIVATESTATUS + "/{authid}")
+    public ResponseEntity<Boolean> activateStatus(@PathVariable Long authid){
+       return ResponseEntity.ok(userProfileService.activateStatus(authid));
+    }
+
+    @PostMapping(ACTIVATESTATUS)
+    public ResponseEntity<Boolean> activateStatus2(@RequestParam Long authid){
+        return ResponseEntity.ok(userProfileService.activateStatus(authid));
+    }
+
 }

@@ -10,7 +10,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE,nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IUserMapper {
 
 
@@ -18,7 +18,7 @@ public interface IUserMapper {
 
 
     UserProfile toUserProfile(final NewCreateUserRequestDto dto);
-    @Mapping(source = "authId" ,target = "id")
+    @Mapping(source = "authid" ,target = "id")
     UpdateByEmailOrUserNameRequestDto toUpdateByEmailOrUserNameRequestDto(final UpdateRequestDto dto);
     UserProfile toUserProfile(final UpdateRequestDto dto);
 }
